@@ -6,12 +6,36 @@ import java.util.HashSet;
 
 public class WGraph_DS implements weighted_graph {
     public static class NodeInfo implements node_info{
-        private int id,tag;
+        private int id;
+        private  double tag;
         private String info;
         private static int c=0;
         private HashSet<node_info> neighbors;
+        private HashMap< Integer,Double>  weight = new HashMap<Integer,Double>();
+        public double getW(NodeInfo n) {
+
+            return this.weight.get(n.getKey());
+        }
+
+        public  void addW(node_info t,double w){
+           this.weight.put(t.getKey(),w);
+        }
+
+        public NodeInfo(node_info n){
+            this.id=n.getKey();
+            this.info=n.getInfo();
+            this.tag=n.getTag();
+            this.neighbors=new HashSet<>();
 
 
+        }
+        public NodeInfo(int key){
+            this.id=key;
+            this.info="";
+            this.tag=0;
+            this.neighbors=new HashSet<>();
+
+        }
         public void removeNode(node_info node) {
             this.neighbors.remove(node);
         }
@@ -62,6 +86,8 @@ public class WGraph_DS implements weighted_graph {
         this.nodeMap=no;
     }
 
+
+
     public WGraph_DS() {
 
     }
@@ -81,7 +107,7 @@ public class WGraph_DS implements weighted_graph {
 
 
     public boolean hasEdge(int node1, int node2) {
-        node_info a=getNode(node1);
+       NodeInfo a= (NodeInfo) getNode(node1);
         node_info b=getNode(node2);
         if(a!=null && b!=null && a.getNi().contains(b)) {
             return true;
@@ -90,34 +116,37 @@ public class WGraph_DS implements weighted_graph {
     }
 
 
-    public void addNode(node_info n) {
-        if(nodeMap.get(n)!=null){
+    public void addNode(int k) {
+        if(nodeMap.get(k)!=null){
             return;
         }
         this.ms++;
-
+        node_info n=new NodeInfo(k);
         this.nodeMap.put(n.getKey(),n);
 
     }
 
 
-    public void connect(int node1, int node2) { //connect node1 with node 2
-        node_info a=getNode(node1);
-        node_info b=getNode(node2);
+    public void connect(int node1, int node2,double w) { //connect node1 with node 2
+        NodeInfo a= (NodeInfo) getNode(node1);
+        NodeInfo b= (NodeInfo) getNode(node2);
 
         if(node1==node2){
 
             return;
         }
 
+     if(w>=0) {
+         if (a != null && b != null && !a.getNi().contains(b)) {
 
-        if( a!=null && b!=null  && !a.getNi().contains(b)){
-
-            a.addNi(b);
-            b.addNi(a);
-            this.eS++;
-            this.ms++;
-        }
+             a.addNi(b);
+             b.addNi(a);
+             a.addW(b,w);
+             b.addW(a,w);
+             this.eS++;
+             this.ms++;
+         }
+     }
         else
             return;
 
@@ -131,7 +160,7 @@ public class WGraph_DS implements weighted_graph {
 
 
     public Collection<node_info> getV(int node_id) {
-        node_info c=getNode(node_id);
+        NodeInfo c= (NodeInfo) getNode(node_id);
         Collection<node_info>c2= c.getNi();
         return c2;
     }
@@ -149,12 +178,13 @@ public class WGraph_DS implements weighted_graph {
         }
 
 
-        node_info a=getNode(key);
+        NodeInfo a= (NodeInfo) getNode(key);
 
         for (node_info b : a.getNi()) {
             //System.out.println(this.eS);
             //System.out.println(b.getKey());
-            b.removeNode(a);
+           NodeInfo bb= (NodeInfo) b;
+            bb.removeNode(a);
             this.eS--;
 
         }
@@ -171,8 +201,8 @@ public class WGraph_DS implements weighted_graph {
 
 
     public void removeEdge(int node1, int node2) {
-        node_info c=getNode(node1);
-        node_info c2=getNode(node2);
+        NodeInfo c= (NodeInfo) getNode(node1);
+        NodeInfo c2= (NodeInfo) getNode(node2);
         if(c.getNi().contains(c2)){
             c.removeNode(c2);
             c2.removeNode(c);
@@ -203,15 +233,9 @@ public class WGraph_DS implements weighted_graph {
         return 0;
     }
 
-    @Override
-    public void addNode(int key) {
 
-    }
 
-    @Override
-    public void connect(int node1, int node2, double w) {
 
-    }
 
 
 }
