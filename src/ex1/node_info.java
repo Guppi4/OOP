@@ -1,5 +1,5 @@
 package ex1;
-
+//privet
 public interface node_info {
     /**
      * Return the key (id) associated with this node.
