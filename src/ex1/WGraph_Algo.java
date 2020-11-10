@@ -1,6 +1,7 @@
 package ex1;
 import ex1.WGraph_DS.NodeInfo;
 
+import java.io.*;
 import java.util.*;
 
 public class WGraph_Algo implements weighted_graph_algorithms {
@@ -50,7 +51,7 @@ public class WGraph_Algo implements weighted_graph_algorithms {
                 //System.out.println(na2);
                 NodeInfo naa2= (NodeInfo) na2;
 
-                gk.connect(na.getKey(),na2.getKey(),naa.getW(naa2));
+                gk.connect(na.getKey(),na2.getKey(),gr.getEdge(naa.getKey(),naa2.getKey()));
             }
         }
 
@@ -169,14 +170,51 @@ public class WGraph_Algo implements weighted_graph_algorithms {
         return (List<node_info>)list;
     }
 
-    @Override
+
     public boolean save(String file) {
-        return false;
+        try {
+            PrintWriter wr=new PrintWriter(new File(file));
+            StringBuilder s=new StringBuilder();
+            for(node_info n:gr.getV()){
+               s.append(n.getKey());
+               s.append(",");
+               s.append(n.getTag());
+               s.append(",");
+               s.append(n.getInfo());
+               s.append("\n");
+
+                wr.write(s.toString());
+                s.setLength(0);
+            }
+        wr.close();
+            return true;
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+            return false;
+        }
+
+
+
     }
 
-    @Override
+
     public boolean load(String file) {
-        return false;
+      String l="";
+      String s=",";
+        try {
+            BufferedReader b=new BufferedReader(new FileReader(file));
+            while ((l=b.readLine())!=null){
+                String[] inf=l.split(s);
+
+            }
+           return true;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
+
+
+
     }
 
     /**

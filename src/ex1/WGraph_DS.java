@@ -12,10 +12,6 @@ public class WGraph_DS implements weighted_graph {
         private static int c=0;
         private HashSet<node_info> neighbors;
         private HashMap< Integer,Double>  weight = new HashMap<Integer,Double>();
-        public double getW(NodeInfo n) {
-
-            return this.weight.get(n.getKey());
-        }
 
         public  void addW(node_info t,double w){
            this.weight.put(t.getKey(),w);
@@ -229,9 +225,17 @@ public class WGraph_DS implements weighted_graph {
     }
 
     public double getEdge(int node1, int node2){
+        NodeInfo a= (NodeInfo) getNode(node1);
+        NodeInfo b= (NodeInfo) getNode(node2);
+       if(hasEdge(node1,node2)){
 
-        return 0;
+           return a.weight.get(b);
+       }
+
+       else
+           return -1;
     }
+
 
 
 
