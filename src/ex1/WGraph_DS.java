@@ -13,6 +13,21 @@ public class WGraph_DS implements weighted_graph {
         private HashSet<node_info> neighbors;
         private HashMap< Integer,Double>  weight = new HashMap<Integer,Double>();
 
+        public NodeInfo() {
+            this.id=c;
+            this.info="";
+            this.tag=n.getTag();
+            this.neighbors=new HashSet<>();
+        }
+
+        public int getpred(){
+           return this.pred;
+       }
+        public void setpred(int p){
+           this.pred=p;
+
+        }
+
         public  void addW(node_info t,double w){
            this.weight.put(t.getKey(),w);
         }
