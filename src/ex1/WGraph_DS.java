@@ -5,8 +5,8 @@ import java.util.HashMap;
 import java.util.HashSet;
 
 public class WGraph_DS implements weighted_graph {
-    public static class NodeInfo implements node_info{
-        private int id;
+    public static class NodeInfo implements Comparable<NodeInfo>,node_info{
+        private int id,pred;
         private  double tag;
         private String info;
         private static int c=0;
@@ -67,6 +67,17 @@ public class WGraph_DS implements weighted_graph {
         public void setTag(int t){
             this.tag=t;
         }
+    public int compareTo(NodeInfo v){
+       int ans=0;
+            if(this.tag-v.getTag()>0)  {
+               ans=1;
+            }
+            else if (this.tag-v.getTag()<0){
+                ans=-1;
+            }
+          return ans;
+        }
+
     }
 
 
