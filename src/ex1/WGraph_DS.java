@@ -39,7 +39,7 @@ public class WGraph_DS implements weighted_graph {
 
             return this.neighbors;
         }
-        public void addNi(node_info t){
+        public void addNi(node_info t){//
             if(t!=null) {
                 this.neighbors.add(t);
             }
