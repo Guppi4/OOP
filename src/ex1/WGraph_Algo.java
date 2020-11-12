@@ -123,6 +123,7 @@ public class WGraph_Algo implements weighted_graph_algorithms {
        Dijkstra(src,gr);
         node_info  n=gr.getNode(dest);
         double s=n.getTag();
+        //System.out.println(s);
         if(s==0){
             return -1;
         }
@@ -311,27 +312,36 @@ public void Dijkstra(int src,weighted_graph g){
     PriorityQueue<NodeInfo> q = new
             PriorityQueue<NodeInfo>();
         NodeInfo n= (NodeInfo) g.getNode(src);
-             n.setTag(0);
-    for (node_info t : g.getV()) {
-       t.setInfo("white");
-        q.add((NodeInfo) t);
 
+    for (node_info t : g.getV()) {
+       // System.out.println(t.getKey());
+        t.setTag(Double.POSITIVE_INFINITY);
+        t.setInfo("white");
+        q.add((NodeInfo) t);
     }
+    n.setTag(0);
  while(!q.isEmpty()){
     NodeInfo u=q.remove();
-     for(node_info a:u.getNi()){
+    //System.out.println(u.getKey());
+    for(node_info a:u.getNi()){
        NodeInfo a2=(NodeInfo) a;
         if(a.getInfo()!="red"){
-           double t=u.getTag()+ g.getEdge(a.getKey(),u.getKey());
-             if(a.getTag()>t){
-                 a2.setTag(t);
+           // System.out.println(u.getKey());
+            double t=u.getTag()+ g.getEdge(a.getKey(),u.getKey());
+
+           if(a.getTag()>t){
+
+               //System.out.println(a.getTag());
+                  a2.setTag(t);
                   a2.setpred(u.getKey());
-                  q.remove(a2);
+                  q.remove(a);
                   q.add(a2);
+               //System.out.println(a.getTag());
              }
         }
-    }
-u.setInfo("red");
+         u.setInfo("red");
+     }
+
  }
 
 

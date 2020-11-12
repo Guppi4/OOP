@@ -15,9 +15,11 @@ public class WGraph_DS implements weighted_graph {
 
         public NodeInfo() {
             this.id=c;
+            c++;
             this.info="";
-            this.tag=n.getTag();
+            this.tag=0;
             this.neighbors=new HashSet<>();
+            this.weight=new HashMap<>();
         }
 
         public int getpred(){
@@ -74,12 +76,10 @@ public class WGraph_DS implements weighted_graph {
             return this.tag;
         }
 
-        @Override
-        public void setTag(double t) {
 
-        }
 
-        public void setTag(int t){
+
+        public void setTag(double t){
             this.tag=t;
         }
     public int compareTo(NodeInfo v){
@@ -254,8 +254,11 @@ public class WGraph_DS implements weighted_graph {
         NodeInfo a= (NodeInfo) getNode(node1);
         NodeInfo b= (NodeInfo) getNode(node2);
        if(hasEdge(node1,node2)){
+          // System.out.println(node1+","+node2);
+          // System.out.println(node2);
+           //System.out.println("db");
 
-           return a.weight.get(b);
+           return a.weight.get(node2);
        }
 
        else
