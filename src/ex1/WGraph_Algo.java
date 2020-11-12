@@ -308,7 +308,7 @@ public class WGraph_Algo implements weighted_graph_algorithms {
 
 
     }
-public void Dijkstra(int src,weighted_graph g){
+public void Dijkstra(int src,weighted_graph g){//dggf
     PriorityQueue<NodeInfo> q = new
             PriorityQueue<NodeInfo>();
         NodeInfo n= (NodeInfo) g.getNode(src);
