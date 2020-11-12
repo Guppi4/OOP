@@ -149,27 +149,28 @@ public class WGraph_Algo implements weighted_graph_algorithms {
         }
 
         LinkedList<node_info> list = new LinkedList<node_info>();
-        BFS(src,gr);
+        Dijkstra(src,gr);
         //System.out.println(gr.getNode(dest).getKey()+" "+gr.getNode(dest).getTag());
         NodeInfo k= (NodeInfo) gr.getNode(dest);
-
         list.addFirst(k);
+
         while(k.getTag()!=0){
-            for (node_info n : k.getNi()){
-                if((k.getTag()-n.getTag())==1){
-                    // System.out.println(n.getKey()+" "+n.getTag());
-                    list.addFirst(n);
-                    k= (NodeInfo) n;
-                    // System.out.println( n.getTag());
-                }
-            }
-
-
+           int k1=k.getpred();
+            k= (NodeInfo) gr.getNode(k1);
+           list.addFirst(k);
 
         }
-        //System.out.println(list.size());
         return (List<node_info>)list;
     }
+
+
+
+
+
+
+        //System.out.println(list.size());
+
+
 
 
     public boolean save(String file) {
