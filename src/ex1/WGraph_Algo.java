@@ -175,46 +175,34 @@ public class WGraph_Algo implements weighted_graph_algorithms {
 
     public boolean save(String file) {
         try {
-            PrintWriter wr=new PrintWriter(new File(file));
-            StringBuilder s=new StringBuilder();
-            for(node_info n:gr.getV()){
-               s.append(n.getKey());
-               s.append(",");
-               s.append(n.getTag());
-               s.append(",");
-               s.append(n.getInfo());
-               s.append("\n");
-
-                wr.write(s.toString());
-                s.setLength(0);
-            }
-        wr.close();
-            return true;
+            FileOutputStream f= new FileOutputStream(file);
+            ObjectOutputStream o=new ObjectOutputStream(f);
+            o.writeObject(gr);
+            o.close();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
-            return false;
+        } catch (IOException e) {
+            e.printStackTrace();
         }
 
-
-
+       return true;
     }
 
 
     public boolean load(String file) {
-      String l="";
-      String s=",";
-        try {
-            BufferedReader b=new BufferedReader(new FileReader(file));
-            while ((l=b.readLine())!=null){
-                String[] inf=l.split(s);
 
-            }
-           return true;
-        } catch (IOException e) {
-            e.printStackTrace();
-            return false;
+        try {
+            FileInputStream i=new FileInputStream(file);
+            ObjectInputStream o=new ObjectInputStream(i);
+            WGraph_DS g= (WGraph_DS) o.readObject();
+
         }
 
+         catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+
+        }
+      return true;
 
 
     }
