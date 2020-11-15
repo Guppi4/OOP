@@ -6,7 +6,7 @@ import java.util.*;
 
 public class WGraph_Algo implements weighted_graph_algorithms {
     private WGraph_DS gr;//
-
+    private static WGraph_DS gr2;
     public WGraph_Algo(weighted_graph_algorithms grap) {
         this.init((weighted_graph) grap);
     }
@@ -24,9 +24,11 @@ public class WGraph_Algo implements weighted_graph_algorithms {
 
     }
 
-    @Override
+
     public weighted_graph getGraph() {
-        return null;
+        weighted_graph g=gr;
+
+        return g;
     }
 
     public weighted_graph copy() {//deep copy of graph
@@ -116,6 +118,11 @@ public class WGraph_Algo implements weighted_graph_algorithms {
 
 
     public double shortestPathDist(int src, int dest) {
+        if(BFS2(src,gr)!=gr.nodeSize()){
+            Double a=-1.0;
+            return a;
+        }
+
         if(src==dest){
             return 0;
         }
@@ -141,6 +148,8 @@ public class WGraph_Algo implements weighted_graph_algorithms {
      */
 
     public List<node_info> shortestPath(int src, int dest) {
+
+
         if(src==dest){
             return null;
         }
@@ -154,8 +163,10 @@ public class WGraph_Algo implements weighted_graph_algorithms {
         NodeInfo k= (NodeInfo) gr.getNode(dest);
         list.addFirst(k);
 
-        while(k.getTag()!=0){
-           int k1=k.getpred();
+        while( k.getKey()!=src){
+
+            int k1=k.getpred();
+            //System.out.println(gr.getNode(k1).getKey());
             k= (NodeInfo) gr.getNode(k1);
            list.addFirst(k);
 
@@ -194,7 +205,8 @@ public class WGraph_Algo implements weighted_graph_algorithms {
         try {
             FileInputStream i=new FileInputStream(file);
             ObjectInputStream o=new ObjectInputStream(i);
-            WGraph_DS g= (WGraph_DS) o.readObject();
+           gr= (WGraph_DS) o.readObject();
+
 
         }
 
