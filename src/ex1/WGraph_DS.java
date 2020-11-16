@@ -4,12 +4,27 @@ import java.io.Serializable;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Objects;
 
 public class WGraph_DS implements weighted_graph , Serializable {
 
     private int eS=0;//number of eages in graph
     private int ms=0;//number of all actyvity in graph
     private HashMap< Integer,node_info> nodeMap = new HashMap<Integer,node_info>();
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        //System.out.println("k");
+        WGraph_DS wGraph_ds = (WGraph_DS) o;
+        System.out.println();
+        return eS == wGraph_ds.eS &&
+                ms == wGraph_ds.ms ;
+
+        //Objects.equals(nodeMap, wGraph_ds.nodeMap  );
+    }
+
 
 
     public static class NodeInfo implements Comparable<NodeInfo>,node_info,Serializable{
@@ -37,7 +52,24 @@ public class WGraph_DS implements weighted_graph , Serializable {
 
         }
 
-        public  void addW(node_info t,double w){
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+
+            if (o == null || getClass() != o.getClass()) return false;
+            NodeInfo nodeInfo = (NodeInfo) o;
+
+            return  id == nodeInfo.id &&
+                    pred == nodeInfo.pred &&
+                    Double.compare(nodeInfo.tag, tag) == 0 &&
+                    Objects.equals(info, nodeInfo.info) &&
+                   // Objects.equals(neighbors, nodeInfo.neighbors) &&
+                    Objects.equals(weight, nodeInfo.weight);
+        }
+
+
+
+        public  void addW(node_info t, double w){
            this.weight.put(t.getKey(),w);
         }
 
@@ -148,8 +180,8 @@ public class WGraph_DS implements weighted_graph , Serializable {
             return;
         }
         this.ms++;
-        node_info n=new NodeInfo(k);
-        this.nodeMap.put(n.getKey(),n);
+
+        this.nodeMap.put(new NodeInfo(k).getKey(),new NodeInfo(k));
 
     }
 
@@ -257,7 +289,7 @@ public class WGraph_DS implements weighted_graph , Serializable {
 
     public double getEdge(int node1, int node2){
         NodeInfo a= (NodeInfo) getNode(node1);
-        NodeInfo b= (NodeInfo) getNode(node2);
+
        if(hasEdge(node1,node2)){
           // System.out.println(node1+","+node2);
           // System.out.println(node2);

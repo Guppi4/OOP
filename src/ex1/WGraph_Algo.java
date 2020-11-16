@@ -7,7 +7,9 @@ import java.util.*;
 public class WGraph_Algo implements weighted_graph_algorithms {
     private WGraph_DS gr;//
     private static WGraph_DS gr2;
+
     public WGraph_Algo(weighted_graph_algorithms grap) {
+
         this.init((weighted_graph) grap);
     }
 
@@ -205,8 +207,8 @@ public class WGraph_Algo implements weighted_graph_algorithms {
         try {
             FileInputStream i=new FileInputStream(file);
             ObjectInputStream o=new ObjectInputStream(i);
-           gr= (WGraph_DS) o.readObject();
-
+              WGraph_DS g= (WGraph_DS) o.readObject();
+              this.gr=g;
 
         }
 
@@ -214,9 +216,9 @@ public class WGraph_Algo implements weighted_graph_algorithms {
             e.printStackTrace();
 
         }
-      return true;
 
 
+        return true;
     }
 
     /**
@@ -274,8 +276,6 @@ public class WGraph_Algo implements weighted_graph_algorithms {
      * @param g - end (target) node
      * @return
      */
-
-
     public void BFS(int src,weighted_graph g){
         for (node_info n : g.getV()) {
             n.setInfo("white");
@@ -347,6 +347,14 @@ public void Dijkstra(int src,weighted_graph g){//dggf
 
 
 
+    }
+
+   @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        WGraph_Algo that = (WGraph_Algo) o;
+        return Objects.equals(gr, that.gr);
     }
 
 
