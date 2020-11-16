@@ -1,3 +1,5 @@
+package ex1;
+
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.HashMap;
@@ -25,7 +27,7 @@ public class WGraph_DS implements weighted_graph, Serializable {
 
 
 
-     static class NodeInfo implements Comparable<NodeInfo>, node_info,Serializable{
+    public static class NodeInfo implements Comparable<NodeInfo>, node_info,Serializable{
         private int id,pred;
         private  double tag;
         private String info;

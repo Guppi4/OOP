@@ -1,3 +1,5 @@
+package ex1;
+
 import WGraph_DS.NodeInfo;
 
 import java.io.*;
