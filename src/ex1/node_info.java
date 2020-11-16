@@ -1,4 +1,5 @@
 package ex1;
+
 //privet
 public interface node_info {
     /**
