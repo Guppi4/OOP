@@ -129,8 +129,8 @@ public class WGraph_Algo implements weighted_graph_algorithms {
             return 0;
         }
 
-        Dijkstra(src,gr);
-        node_info n=gr.getNode(dest);
+       Dijkstra(src,gr);
+        node_info  n=gr.getNode(dest);
         double s=n.getTag();
         //System.out.println(s);
         if(s==0){
@@ -170,7 +170,7 @@ public class WGraph_Algo implements weighted_graph_algorithms {
             int k1=k.getpred();
             //System.out.println(gr.getNode(k1).getKey());
             k= (NodeInfo) gr.getNode(k1);
-            list.addFirst(k);
+           list.addFirst(k);
 
         }
         return (List<node_info>)list;
@@ -181,7 +181,7 @@ public class WGraph_Algo implements weighted_graph_algorithms {
 
 
 
-    //System.out.println(list.size());
+        //System.out.println(list.size());
 
 
 
@@ -198,7 +198,7 @@ public class WGraph_Algo implements weighted_graph_algorithms {
             e.printStackTrace();
         }
 
-        return true;
+       return true;
     }
 
 
@@ -207,12 +207,12 @@ public class WGraph_Algo implements weighted_graph_algorithms {
         try {
             FileInputStream i=new FileInputStream(file);
             ObjectInputStream o=new ObjectInputStream(i);
-            WGraph_DS g= (WGraph_DS) o.readObject();
-            this.gr=g;
+              WGraph_DS g= (WGraph_DS) o.readObject();
+              this.gr=g;
 
         }
 
-        catch (IOException | ClassNotFoundException e) {
+         catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
 
         }
@@ -229,7 +229,7 @@ public class WGraph_Algo implements weighted_graph_algorithms {
      * @return
      */
 
-    public int BFS2(int src, weighted_graph g){
+    public int BFS2(int src,weighted_graph g){
 
         for (node_info n : g.getV()) {
             // System.out.println(n);
@@ -276,7 +276,7 @@ public class WGraph_Algo implements weighted_graph_algorithms {
      * @param g - end (target) node
      * @return
      */
-    public void BFS(int src, weighted_graph g){
+    public void BFS(int src,weighted_graph g){
         for (node_info n : g.getV()) {
             n.setInfo("white");
             n.setTag(0);
@@ -309,47 +309,47 @@ public class WGraph_Algo implements weighted_graph_algorithms {
 
 
     }
-    public void Dijkstra(int src, weighted_graph g){//dggf
-        PriorityQueue<NodeInfo> q = new
-                PriorityQueue<NodeInfo>();
+public void Dijkstra(int src,weighted_graph g){//dggf
+    PriorityQueue<NodeInfo> q = new
+            PriorityQueue<NodeInfo>();
         NodeInfo n= (NodeInfo) g.getNode(src);
 
-        for (node_info t : g.getV()) {
-            // System.out.println(t.getKey());
-            t.setTag(Double.POSITIVE_INFINITY);
-            t.setInfo("white");
-            q.add((NodeInfo) t);
+    for (node_info t : g.getV()) {
+       // System.out.println(t.getKey());
+        t.setTag(Double.POSITIVE_INFINITY);
+        t.setInfo("white");
+        q.add((NodeInfo) t);
+    }
+    n.setTag(0);
+ while(!q.isEmpty()){
+    NodeInfo u=q.remove();
+    //System.out.println(u.getKey());
+    for(node_info a:u.getNi()){
+       NodeInfo a2=(NodeInfo) a;
+        if(a.getInfo()!="red"){
+           // System.out.println(u.getKey());
+            double t=u.getTag()+ g.getEdge(a.getKey(),u.getKey());
+
+           if(a.getTag()>t){
+
+               //System.out.println(a.getTag());
+                  a2.setTag(t);
+                  a2.setpred(u.getKey());
+                  q.remove(a);
+                  q.add(a2);
+               //System.out.println(a.getTag());
+             }
         }
-        n.setTag(0);
-        while(!q.isEmpty()){
-            NodeInfo u=q.remove();
-            //System.out.println(u.getKey());
-            for(node_info a:u.getNi()){
-                NodeInfo a2=(NodeInfo) a;
-                if(a.getInfo()!="red"){
-                    // System.out.println(u.getKey());
-                    double t=u.getTag()+ g.getEdge(a.getKey(),u.getKey());
+         u.setInfo("red");
+     }
 
-                    if(a.getTag()>t){
-
-                        //System.out.println(a.getTag());
-                        a2.setTag(t);
-                        a2.setpred(u.getKey());
-                        q.remove(a);
-                        q.add(a2);
-                        //System.out.println(a.getTag());
-                    }
-                }
-                u.setInfo("red");
-            }
-
-        }
+ }
 
 
 
     }
 
-    @Override
+   @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
@@ -359,4 +359,5 @@ public class WGraph_Algo implements weighted_graph_algorithms {
 
 
 }
+
 
