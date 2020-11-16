@@ -1,16 +1,14 @@
-
-package ex1;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Objects;
 
-public class WGraph_DS implements weighted_graph , Serializable {
+public class WGraph_DS implements weighted_graph, Serializable {
 
     private int eS=0;//number of eages in graph
     private int ms=0;//number of all actyvity in graph
-    private HashMap< Integer,node_info> nodeMap = new HashMap<Integer,node_info>();
+    private HashMap< Integer, node_info> nodeMap = new HashMap<Integer, node_info>();
 
     @Override
     public boolean equals(Object o) {
@@ -27,7 +25,7 @@ public class WGraph_DS implements weighted_graph , Serializable {
 
 
 
-    public static class NodeInfo implements Comparable<NodeInfo>,node_info,Serializable{
+     static class NodeInfo implements Comparable<NodeInfo>, node_info,Serializable{
         private int id,pred;
         private  double tag;
         private String info;
@@ -141,7 +139,7 @@ public class WGraph_DS implements weighted_graph , Serializable {
 
 
     public WGraph_DS
-            (HashMap< Integer,node_info> no){
+            (HashMap< Integer, node_info> no){
         this.nodeMap=no;
     }
 

@@ -1,5 +1,4 @@
-package ex1;
-import ex1.WGraph_DS.NodeInfo;
+import WGraph_DS.NodeInfo;
 
 import java.io.*;
 import java.util.*;
@@ -130,7 +129,7 @@ public class WGraph_Algo implements weighted_graph_algorithms {
         }
 
        Dijkstra(src,gr);
-        node_info  n=gr.getNode(dest);
+        node_info n=gr.getNode(dest);
         double s=n.getTag();
         //System.out.println(s);
         if(s==0){
@@ -229,7 +228,7 @@ public class WGraph_Algo implements weighted_graph_algorithms {
      * @return
      */
 
-    public int BFS2(int src,weighted_graph g){
+    public int BFS2(int src, weighted_graph g){
 
         for (node_info n : g.getV()) {
             // System.out.println(n);
@@ -276,7 +275,7 @@ public class WGraph_Algo implements weighted_graph_algorithms {
      * @param g - end (target) node
      * @return
      */
-    public void BFS(int src,weighted_graph g){
+    public void BFS(int src, weighted_graph g){
         for (node_info n : g.getV()) {
             n.setInfo("white");
             n.setTag(0);
@@ -309,7 +308,7 @@ public class WGraph_Algo implements weighted_graph_algorithms {
 
 
     }
-public void Dijkstra(int src,weighted_graph g){//dggf
+public void Dijkstra(int src, weighted_graph g){//dggf
     PriorityQueue<NodeInfo> q = new
             PriorityQueue<NodeInfo>();
         NodeInfo n= (NodeInfo) g.getNode(src);
@@ -349,7 +348,7 @@ public void Dijkstra(int src,weighted_graph g){//dggf
 
     }
 
-   @Override
+    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
