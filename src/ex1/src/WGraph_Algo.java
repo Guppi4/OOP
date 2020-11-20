@@ -1,5 +1,6 @@
-package ex1;
-import ex1.WGraph_DS.NodeInfo;
+package ex1.src;
+
+import ex1.src.WGraph_DS.NodeInfo;
 
 import java.io.*;
 import java.util.*;

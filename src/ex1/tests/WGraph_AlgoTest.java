@@ -1,6 +1,10 @@
-package ex1;
+package ex1.tests;
 
 import org.junit.jupiter.api.Test;
+import ex1.src.WGraph_Algo;
+import ex1.src.node_info;
+import ex1.src.weighted_graph;
+import ex1.src.weighted_graph_algorithms;
 
 import java.util.List;
 
