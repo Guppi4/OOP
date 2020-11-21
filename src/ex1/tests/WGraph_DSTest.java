@@ -67,6 +67,12 @@ class WGraph_DSTest {
             assertNotNull(n);
         }
     }
+    @org.junit.Test(timeout = 5000)
+    @Test
+    public void testruntime(){
+        int v=100000,e=v*10;
+        weighted_graph g=graph_creator(v,e,1);
+    }
 
     @Test
     void hasEdge() {
