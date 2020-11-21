@@ -103,7 +103,13 @@ public class WGraph_Algo implements weighted_graph_algorithms {
 
 
     }
-
+    /**
+     * returns the length of the shortest path between src to dest
+     * Note: if no such path --> returns -1
+     * @param src - start node
+     * @param dest - end (target) node
+     * @return
+     */
     public double shortestPathDist(int src, int dest) { //faind shortestpath (Dijkstra)
         if(BFS2(src,gr)!=gr.nodeSize()){
             Double a=-1.0;
