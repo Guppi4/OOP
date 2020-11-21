@@ -26,8 +26,6 @@ public class WGraph_Algo implements weighted_graph_algorithms {
         }
 
     }
-
-
     public weighted_graph getGraph() {
         weighted_graph g=gr;
 
@@ -37,36 +35,23 @@ public class WGraph_Algo implements weighted_graph_algorithms {
     public weighted_graph copy() {//deep copy of graph
 
         weighted_graph gk = new WGraph_DS();
-
-
         for (node_info n : gr.getV()) {
             //System.out.println(n);
             node_info no = new NodeInfo(n);
-
             gk.addNode(no.getKey());
-
-
-
-
         }
-
         for (node_info na : gr.getV()) {
             NodeInfo naa= (NodeInfo) na;
             for(node_info na2:naa.getNi()){
                 //System.out.println(na2);
                 NodeInfo naa2= (NodeInfo) na2;
-
                 gk.connect(na.getKey(),na2.getKey(),gr.getEdge(naa.getKey(),naa2.getKey()));
             }
         }
 
 
-
-
-
         return gk;
     }
-
 
     public boolean isConnected() {   //cheaking using afinction BFS if graph connected
         int m=0;
@@ -119,8 +104,7 @@ public class WGraph_Algo implements weighted_graph_algorithms {
 
     }
 
-
-    public double shortestPathDist(int src, int dest) {
+    public double shortestPathDist(int src, int dest) { //faind shortestpath (Dijkstra)
         if(BFS2(src,gr)!=gr.nodeSize()){
             Double a=-1.0;
             return a;
@@ -130,7 +114,7 @@ public class WGraph_Algo implements weighted_graph_algorithms {
             return 0;
         }
 
-       Dijkstra(src,gr);
+        Dijkstra(src,gr);
         node_info  n=gr.getNode(dest);
         double s=n.getTag();
         //System.out.println(s);
@@ -171,7 +155,7 @@ public class WGraph_Algo implements weighted_graph_algorithms {
             int k1=k.getpred();
             //System.out.println(gr.getNode(k1).getKey());
             k= (NodeInfo) gr.getNode(k1);
-           list.addFirst(k);
+            list.addFirst(k);
 
         }
         return (List<node_info>)list;
@@ -182,12 +166,12 @@ public class WGraph_Algo implements weighted_graph_algorithms {
 
 
 
-        //System.out.println(list.size());
+    //System.out.println(list.size());
 
 
 
 
-    public boolean save(String file) {
+    public boolean save(String file) { //save graph to file
         try {
             FileOutputStream f= new FileOutputStream(file);
             ObjectOutputStream o=new ObjectOutputStream(f);
@@ -199,21 +183,21 @@ public class WGraph_Algo implements weighted_graph_algorithms {
             e.printStackTrace();
         }
 
-       return true;
+        return true;
     }
 
 
-    public boolean load(String file) {
+    public boolean load(String file) { //load graph to gile
 
         try {
             FileInputStream i=new FileInputStream(file);
             ObjectInputStream o=new ObjectInputStream(i);
-              WGraph_DS g= (WGraph_DS) o.readObject();
-              this.gr=g;
+            WGraph_DS g= (WGraph_DS) o.readObject();
+            this.gr=g;
 
         }
 
-         catch (IOException | ClassNotFoundException e) {
+        catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
 
         }
@@ -230,7 +214,7 @@ public class WGraph_Algo implements weighted_graph_algorithms {
      * @return
      */
 
-    public int BFS2(int src,weighted_graph g){
+    public int BFS2(int src,weighted_graph g){ //BFS for isconnected
 
         for (node_info n : g.getV()) {
             // System.out.println(n);
@@ -310,47 +294,54 @@ public class WGraph_Algo implements weighted_graph_algorithms {
 
 
     }
-public void Dijkstra(int src,weighted_graph g){//dggf
-    PriorityQueue<NodeInfo> q = new
-            PriorityQueue<NodeInfo>();
+    /**
+     * algoritm Dijkstra for funtion "shortestPath" and "shortestpathdist"
+     *
+     * @param src - start node
+     * @param g - end (target)
+     * @return
+     */
+    public void Dijkstra(int src,weighted_graph g){//Algoritm for finding a shortputh
+        PriorityQueue<NodeInfo> q = new
+                PriorityQueue<NodeInfo>();
         NodeInfo n= (NodeInfo) g.getNode(src);
 
-    for (node_info t : g.getV()) {
-       // System.out.println(t.getKey());
-        t.setTag(Double.POSITIVE_INFINITY);
-        t.setInfo("white");
-        q.add((NodeInfo) t);
-    }
-    n.setTag(0);
- while(!q.isEmpty()){
-    NodeInfo u=q.remove();
-    //System.out.println(u.getKey());
-    for(node_info a:u.getNi()){
-       NodeInfo a2=(NodeInfo) a;
-        if(a.getInfo()!="red"){
-           // System.out.println(u.getKey());
-            double t=u.getTag()+ g.getEdge(a.getKey(),u.getKey());
-
-           if(a.getTag()>t){
-
-               //System.out.println(a.getTag());
-                  a2.setTag(t);
-                  a2.setpred(u.getKey());
-                  q.remove(a);
-                  q.add(a2);
-               //System.out.println(a.getTag());
-             }
+        for (node_info t : g.getV()) {
+            // System.out.println(t.getKey());
+            t.setTag(Double.POSITIVE_INFINITY);
+            t.setInfo("white");
+            q.add((NodeInfo) t);
         }
-         u.setInfo("red");
-     }
+        n.setTag(0);
+        while(!q.isEmpty()){
+            NodeInfo u=q.remove();
+            //System.out.println(u.getKey());
+            for(node_info a:u.getNi()){
+                NodeInfo a2=(NodeInfo) a;
+                if(a.getInfo()!="red"){
+                    // System.out.println(u.getKey());
+                    double t=u.getTag()+ g.getEdge(a.getKey(),u.getKey());
 
- }
+                    if(a.getTag()>t){
+
+                        //System.out.println(a.getTag());
+                        a2.setTag(t);
+                        a2.setpred(u.getKey());
+                        q.remove(a);
+                        q.add(a2);
+                        //System.out.println(a.getTag());
+                    }
+                }
+                u.setInfo("red");
+            }
+
+        }
 
 
 
     }
 
-   @Override
+    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
@@ -360,5 +351,22 @@ public void Dijkstra(int src,weighted_graph g){//dggf
 
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
