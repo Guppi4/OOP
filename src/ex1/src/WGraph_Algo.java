@@ -169,6 +169,13 @@ public class WGraph_Algo implements weighted_graph_algorithms {
     //System.out.println(list.size());
 
 
+    /**
+     * function save   graph to file
+     *
+     * @param file - File
+
+     * @return
+     */
 
 
     public boolean save(String file) { //save graph to file
@@ -185,7 +192,13 @@ public class WGraph_Algo implements weighted_graph_algorithms {
 
         return true;
     }
+    /**
+     * function load   graph to file
+     *
+     * @param file - File
 
+     * @return
+     */
 
     public boolean load(String file) { //load graph to gile
 
