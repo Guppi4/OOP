@@ -1,9 +1,9 @@
 package ex1.tests;
 
-import org.junit.jupiter.api.Test;
 import ex1.src.WGraph_DS;
 import ex1.src.node_info;
 import ex1.src.weighted_graph;
+import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -100,8 +100,12 @@ class WGraph_DSTest {
     }
 
 
+
+
+
+
     @Test
-    void removeNode() {
+    void removeNode()  {
         weighted_graph g = new WGraph_DS();
         g.addNode(0);
         g.addNode(1);
@@ -116,6 +120,7 @@ class WGraph_DSTest {
         int e = g.edgeSize();
         assertEquals(0,e);
         assertEquals(3,g.nodeSize());
+
     }
 
     @Test
