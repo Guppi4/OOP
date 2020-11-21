@@ -48,10 +48,10 @@ public class WGraph_Algo implements weighted_graph_algorithms {
                 gk.connect(na.getKey(),na2.getKey(),gr.getEdge(naa.getKey(),naa2.getKey()));
             }
         }
-
-
         return gk;
     }
+
+
 
     public boolean isConnected() {   //cheaking using afinction BFS if graph connected
         int m=0;
@@ -63,24 +63,15 @@ public class WGraph_Algo implements weighted_graph_algorithms {
 
             m4++;
 
-
-
         }
-
         if(gr.nodeSize()==0){
 
             return true;
         }
-
-
-
         if(gr.nodeSize()==1){
             // System.out.println(gr.nodeSize());
             return true;
         }
-
-
-
         //System.out.println(gr.nodeSize());
         for (node_info n : gr.getV()) {
 
@@ -100,9 +91,18 @@ public class WGraph_Algo implements weighted_graph_algorithms {
         else
             return  false;
 
-
-
     }
+
+
+
+
+
+
+
+
+
+
+
     /**
      * returns the length of the shortest path between src to dest
      * Note: if no such path --> returns -1
@@ -273,46 +273,7 @@ public class WGraph_Algo implements weighted_graph_algorithms {
 
     }
 
-    /**
-     * algoritm BFS for funtion "shortestPath" and "shortestpathdist"
-     *
-     * @param src - start node
-     * @param g - end (target) node
-     * @return
-     */
-    public void BFS(int src,weighted_graph g){
-        for (node_info n : g.getV()) {
-            n.setInfo("white");
-            n.setTag(0);
 
-        }
-        // int numNode = 0;
-
-        gr.getNode(src).setInfo("gray");
-        Queue<node_info> q = new LinkedList<node_info>();
-        q.offer(gr.getNode(src));
-
-        while (!q.isEmpty()) {
-            NodeInfo qq = (NodeInfo) q.remove();
-            for(node_info a:qq.getNi()){
-                if(a.getInfo()=="white"){
-                    double scrr=qq.getTag();
-                    a.setTag(scrr+1);
-
-                    node_info k=g.getNode(a.getKey());
-                    k.setInfo("grey");
-                    q.offer(k);
-
-                }
-            }
-            qq.setInfo("black");
-            //numNode++;
-        }
-
-
-
-
-    }
     /**
      * algoritm Dijkstra for funtion "shortestPath" and "shortestpathdist"
      *
