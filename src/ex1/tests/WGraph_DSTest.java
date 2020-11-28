@@ -67,7 +67,7 @@ class WGraph_DSTest {
             assertNotNull(n);
         }
     }
-    @org.junit.Test(timeout = 10000)
+    @org.junit.Test(timeout = 5000)
     @Test
     public void testruntime(){
         int v=100000,e=v*10;
